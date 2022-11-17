@@ -12,12 +12,12 @@ export default {
 
 <style>
 .letter{
-    border: solid black 1px;
-    display: flex;
-    justify-content: space-between;
+    border: solid rgb(121, 234, 170) 1px;
     margin: auto;
     padding: 10px;
     font-size: 50px;
-
+    width: 70px;
+    height: 70px;
+    color: white;
 }
 </style>

@@ -24,8 +24,8 @@ export default {
 .row{
     display: flex;
     justify-content: space-between;
-    border: 1px solid red;
+    border: 1px solid rgb(121, 234, 170);
     width: 500px;
-    margin: auto;
+    margin: 5px auto;
 }
 </style>
