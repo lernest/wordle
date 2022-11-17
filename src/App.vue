@@ -1,16 +1,24 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <LetterRow word="Hello" />
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import LetterRow from "./components/LetterRow.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    LetterRow,
   },
+  data(){
+    return{
+      guesses: {
+        gray: [],
+        yellow: [],
+        green: []
+      }
+    }
+  }
 };
 </script>
 
