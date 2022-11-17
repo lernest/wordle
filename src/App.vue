@@ -1,14 +1,7 @@
 <template>
 <div>
-  
-  <!-- <LetterRow :word="this.guesses[0]?this.guesses[0]:''"/>
-  <LetterRow :word="this.guesses[1]?this.guesses[1]:''"/>
-  <LetterRow :word="this.guesses[2]?this.guesses[2]:''"/>
-  <LetterRow :word="this.guesses[3]?this.guesses[3]:''"/>
-  <LetterRow :word="this.currentGuess"/> -->
-
-  <LetterRow v-for="guess in guesses" :word="guess"/>
-  <LetterRow v-if="guesses.length < 5" :word="currentGuess"/>
+    <LetterRow v-for="guess in guesses" :word="guess"/>
+  <LetterRow v-if="!isGameOver" :word="currentGuess"/>
   <LetterRow v-if="!isGameOver" v-for="index in emptyRows" :key="index" word=""/>
 </div>
 <Keyboard v-on:keyPressed="addLetter"/>
@@ -33,12 +26,13 @@ export default {
   },
   data(){
     return{
+      target: 'maple',
       guessedLetters: {
         gray: [],
         yellow: [],
         green: []
       },
-      guesses: ['raise','earth','maple'],
+      guesses: [],//['raise','earth','maple'],
       currentGuess:'',
     }
   },
@@ -60,8 +54,40 @@ export default {
     },
     submitGuess(){
       console.log('submitting guess: '+this.currentGuess)
+      this.evaluateGuess(this.currentGuess)
       this.guesses.push(this.currentGuess)
       this.currentGuess = ''
+    },
+    evaluateGuess(guess){
+      let guessArray = guess.split('')
+      let targetArray = this.target.split('')
+      
+      // check for exact matches
+      guessArray.forEach((c,i)=>{
+        if(targetArray[i]===c){
+          this.guessedLetters.green.push(c)
+          // remove the guessed letter from the target array
+          targetArray.splice(i,1)
+          guessArray.splice(i,1)
+        }
+      })
+
+      // check for yellows
+      for(let i=0; i<guessArray.length; i++){
+        for(let j=0; j<targetArray.length; j++){
+          if(guessArray[i] === targetArray[j]){
+            this.guessedLetters.yellow.push(guessArray[i])
+            targetArray.splice(i,1)
+            guessArray.splice(i,1)
+          }
+        }
+      }
+
+      // the rest are gray
+      guessArray.forEach(letter => this.guessedLetters.gray.push(letter))
+
+      console.log(this.guessedLetters)
+
     }
   }
 };
