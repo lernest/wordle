@@ -30,7 +30,7 @@ computed:{
     border: 1px solid yellow;
     border-radius: 10px;
     color: white;
-    font-size: 20px;
+    font-size: 15px;
     padding: 10px;
     min-width: 17px;
     cursor: pointer;

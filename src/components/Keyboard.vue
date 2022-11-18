@@ -39,7 +39,7 @@ methods:{
 
 <style>
 .keyboard{
-    width: 30%;
+    width: 50%;
     margin: auto;
 }
 .keyboard-row{

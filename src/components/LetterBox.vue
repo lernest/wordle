@@ -14,16 +14,16 @@ export default {
     computed:{
         colorClass(){
             if(this.color == 0){
-                return 'gray'
+                return 'grayLetter'
             }
             if(this.color == 1){
-                return 'yellow'
+                return 'yellowLetter'
             }
             if(this.color == 2){
-                return 'green'
+                return 'greenLetter'
             }
             else{
-                return 'black'
+                return 'blackLetter'
             }
         }
     }
@@ -40,17 +40,16 @@ export default {
     height: 70px;
     color: white;
 }
-.black{
-    background-color:black
+.blackLetter{
+    background-color:black;
 }
-.gray{
-    background-color: gray;
-    color: red
+.grayLetter{
+    background-color: rgb(52, 52, 52);
 }
-.yellow{
-    background-color: yellow
+.yellowLetter{
+    background-color: rgb(206, 169, 6);
 }
-.green{
-    background-color: green
+.greenLetter{
+    background-color: rgb(0, 78, 0);
 }
 </style>
