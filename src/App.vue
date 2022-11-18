@@ -32,11 +32,31 @@ export default {
         yellow: new Set(),
         green: new Set()
       },
+      colorMap: {},
       guesses: [],//['raise','earth','maple'],
+      evaluatedGuesses:[],
       currentGuess:'',
     }
   },
   methods:{
+    printBoard(arr){
+      let str = ''
+      arr.forEach(x => {
+          if(x[1] == 1){
+          // yellow
+              str += `| ( ${x[0]} ) |`
+          }
+          else if(x[1] == 2){
+          // green
+              str += `| * ${x[0]} * |`
+          }
+          else{
+          // gray
+          str += `|   ${x[0]}   |`
+          }
+      })
+      console.log(str)
+    },
     addLetter(letter){
       if(!this.isGameOver){
 
@@ -59,57 +79,46 @@ export default {
       this.currentGuess = ''
     },
     evaluateGuess(guess){
-      let guessArray = guess.split('')
-      let targetArray = this.target.split('')
-
-      let removed = []
+      /* 
+      'guessArr' is an array of tuples containing each character in the current guess and the evaluated color
+            ex: [['a',2],['m',1],['l',2],['e',0]]
+            color key:
+              0 -- gray
+              1 -- yellow
+              2 -- green
+      */
+      let guessArr = guess.toUpperCase().split('').map(x => [x,0])
+      let targetArr = this.target.toUpperCase().split('')
       
-      // check for exact matches
-      guessArray.forEach((c,i)=>{
-        console.log(`--check for exact matches ${c} == ${targetArray[i]}`)
-        if(targetArray[i]===c){
-          console.log(`adding ${c} to green`)
-          this.guessedLetters.green.add(c)
-          // "remove" the guessed letter from the target array
-          removed.push(c)
+      for(let i=0; i<guessArr.length; i++){
+          // if each letter is in target array -> flip to yellow (1)
+              if(targetArr.includes(guessArr[i][0])){
+                  guessArr[i][1] = 1
+              }
+      
+          // if the letter matches the same index -> flip to green (2)
+              if(guessArr[i][0] == targetArr[i]){
+                  guessArr[i][1] = 2
+              }
+      
+          // otherwise keep it gray
+      }
 
-          console.log(`         targetArray: ${targetArray}`)
-          console.log(`         guessArray: ${guessArray}`)
-          console.log(`         greenArray: ${new Array(...this.guessedLetters.green).join(' ')}`)
+      /*
+        update keyboard colors
+        if the letter isn't already green, set it to whichever color the evaluated guess indicates
+      */
+      guessArr.forEach(letter => {
+        if(this.colorMap[letter[0]] != 2){
+          this.colorMap[letter[0]] = letter[1]
         }
       })
 
-      // check for yellows
-    guessArray = guessArray.filter(x => !removed.includes(x))
-    targetArray = targetArray.filter(x => !removed.includes(x))
+      this.printBoard(guessArr)
+      console.log(this.colorMap)
 
-      for(let i=0; i<guessArray.length; i++){
-        for(let j=0; j<targetArray.length; j++){
-          if(guessArray[i] === targetArray[j]){
-            console.log(`adding ${guessArray[i]} to yellow`)
-            this.guessedLetters.yellow.add(guessArray[i])
-            removed.push(guessArray[i])
-            console.log(`         targetArray: ${targetArray}`)
-            console.log(`         guessArray: ${guessArray}`)
-            console.log(`         yellowArray: ${new Array(...this.guessedLetters.yellow).join(' ')}`)
-          }
-        }
-      }
-
-      // the rest are gray
-
-      guessArray = guessArray.filter(x => !removed.includes(x))
-      targetArray = targetArray.filter(x => !removed.includes(x))
-
-      guessArray.forEach(letter => {
-        console.log(`adding ${letter} to gray`)
-        this.guessedLetters.gray.add(letter)
-        console.log(`         targetArray: ${targetArray}`)
-        console.log(`         guessArray: ${guessArray}`)
-        console.log(`         grayArray: ${new Array(...this.guessedLetters.gray).join(' ')}`)
-        })
-
-      console.log(this.guessedLetters)
+      // save the evaluated guess
+      this.evaluatedGuesses.push(guessArr)
 
     }
   }

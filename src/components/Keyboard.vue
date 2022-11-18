@@ -1,11 +1,14 @@
 <template>
 <div class="keyboard">
+
   <div class="keyboard-row">
     <KeyLetter v-for="letter in firstRow" :letter="letter" v-on:keyPress="addLetter(letter)"/>
   </div>
+
   <div class="keyboard-row">
     <KeyLetter v-for="letter in secondRow" :letter="letter" v-on:keyPress="addLetter(letter)"/>
   </div>
+  
   <div class="keyboard-row">
     <KeyLetter v-for="letter in thirdRow" :letter="letter" v-on:keyPress="addLetter(letter)"/>
   </div>
