@@ -66,7 +66,9 @@ export default {
       console.log(str)
     },
     addLetter(letter){
-      if(!this.isGameOver){
+      let validKeys = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','backspace','enter']
+
+      if(!this.isGameOver && validKeys.includes(letter.toLowerCase())){
 
         if(letter.toLowerCase() === 'backspace' && this.currentGuess.length > 0){
             this.currentGuess = this.currentGuess.substring(0,this.currentGuess.length-1)
