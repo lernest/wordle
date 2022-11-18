@@ -1,17 +1,17 @@
 <template>
 <div v-if="!isEvaluated" class="row">
-  <LetterBox :letter="this.word[0]?this.word[0]:' '"/>
-  <LetterBox :letter="this.word[1]?this.word[1]:' '"/>
-  <LetterBox :letter="this.word[2]?this.word[2]:' '"/>
-  <LetterBox :letter="this.word[3]?this.word[3]:' '"/>
-  <LetterBox :letter="this.word[4]?this.word[4]:' '"/>
+  <LetterBox :letter="word[0]?word[0]:' '"/>
+  <LetterBox :letter="word[1]?word[1]:' '"/>
+  <LetterBox :letter="word[2]?word[2]:' '"/>
+  <LetterBox :letter="word[3]?word[3]:' '"/>
+  <LetterBox :letter="word[4]?word[4]:' '"/>
 </div>
 <div v-if="isEvaluated" class="row">
-  <LetterBox :letter="this.evaluatedWord[0][0]" :color="this.evaluatedWord[0][1]"/>
-  <LetterBox :letter="this.evaluatedWord[1][0]" :color="this.evaluatedWord[1][1]"/>
-  <LetterBox :letter="this.evaluatedWord[2][0]" :color="this.evaluatedWord[2][1]"/>
-  <LetterBox :letter="this.evaluatedWord[3][0]" :color="this.evaluatedWord[3][1]"/>
-  <LetterBox :letter="this.evaluatedWord[4][0]" :color="this.evaluatedWord[4][1]"/>
+  <LetterBox :letter="evaluatedWord[0][0]" :color="evaluatedWord[0][1]"/>
+  <LetterBox :letter="evaluatedWord[1][0]" :color="evaluatedWord[1][1]"/>
+  <LetterBox :letter="evaluatedWord[2][0]" :color="evaluatedWord[2][1]"/>
+  <LetterBox :letter="evaluatedWord[3][0]" :color="evaluatedWord[3][1]"/>
+  <LetterBox :letter="evaluatedWord[4][0]" :color="evaluatedWord[4][1]"/>
 </div>
 </template>
 
@@ -37,7 +37,6 @@ export default {
 .row{
     display: flex;
     justify-content: space-between;
-    border: 1px solid rgb(121, 234, 170);
     width: 500px;
     margin: 5px auto;
 }

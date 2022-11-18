@@ -2,15 +2,15 @@
 <div class="keyboard">
 
   <div class="keyboard-row">
-    <KeyLetter v-for="letter in firstRow" :letter="letter" v-on:keyPress="addLetter(letter)"/>
+    <KeyLetter v-for="letter in firstRow" :letter="letter" v-on:keyPress="addLetter(letter)" :color="colorMap[letter.toUpperCase()]"/>
   </div>
 
   <div class="keyboard-row">
-    <KeyLetter v-for="letter in secondRow" :letter="letter" v-on:keyPress="addLetter(letter)"/>
+    <KeyLetter v-for="letter in secondRow" :letter="letter" v-on:keyPress="addLetter(letter)" :color="colorMap[letter.toUpperCase()]"/>
   </div>
   
   <div class="keyboard-row">
-    <KeyLetter v-for="letter in thirdRow" :letter="letter" v-on:keyPress="addLetter(letter)"/>
+    <KeyLetter v-for="letter in thirdRow" :letter="letter" v-on:keyPress="addLetter(letter)" :color="colorMap[letter.toUpperCase()]"/>
   </div>
 </div>
 </template>
@@ -25,8 +25,17 @@ data(){
         thirdRow: ['enter','z','x','c','v','b','n','m','backspace']
     }
 },
+props:{
+    colorMap: Object,
+    key: Number
+},
 components:{
     KeyLetter
+},
+mounted(){
+    console.log("keyboard mounted")
+    console.log(this.colorMap)
+    console.log(this.colorMap['M'])
 },
 methods:{
     addLetter(letter){
@@ -43,7 +52,6 @@ methods:{
     margin: auto;
 }
 .keyboard-row{
-    background-color: green;
     display: flex;
     justify-content: space-between;
 }

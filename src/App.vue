@@ -4,7 +4,7 @@
     <LetterRow v-if="guesses.length<6" :word="currentGuess"/>
     <LetterRow v-for="index in emptyRows" :key="index" word=""/>
   </div>
-  <Keyboard v-on:keyPressed="addLetter"/>
+  <Keyboard v-on:keyPressed="addLetter" :colorMap="colorMap" :key="componentKey"/>
 </template>
 
 <script>
@@ -44,9 +44,13 @@ export default {
       guesses: [],
       evaluatedGuesses:[],
       currentGuess:'',
+      componentKey: 0
     }
   },
   methods:{
+    forceRerender(){
+      this.componentKey += 1;
+    },
     printBoard(arr){
       let str = ''
       arr.forEach(x => {
@@ -85,6 +89,7 @@ export default {
       this.evaluateGuess(this.currentGuess)
       this.guesses.push(this.currentGuess)
       this.currentGuess = ''
+      this.forceRerender()
     },
     evaluateGuess(guess){
       /* 
