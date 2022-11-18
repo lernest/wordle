@@ -16,6 +16,12 @@ export default {
     LetterRow,
     Keyboard
   },
+  created() {
+    window.addEventListener('keydown', (e) => {
+      console.log(e.key)
+      this.addLetter(e.key)
+    });
+  },
   computed:{
     emptyRows(){
       return 5-this.guesses.length >= 0 ? 5-this.guesses.length : 0
@@ -60,13 +66,13 @@ export default {
     addLetter(letter){
       if(!this.isGameOver){
 
-        if(letter === 'backspace' && this.currentGuess.length > 0){
+        if(letter.toLowerCase() === 'backspace' && this.currentGuess.length > 0){
             this.currentGuess = this.currentGuess.substring(0,this.currentGuess.length-1)
         }
-        else if(letter !== 'enter' && letter !== 'backspace' && this.currentGuess.length < 5){
+        else if(letter.toLowerCase() !== 'enter' && letter.toLowerCase() !== 'backspace' && this.currentGuess.length < 5){
           this.currentGuess+=letter
         }
-        else if(letter === 'enter' && this.currentGuess.length == 5){
+        else if(letter.toLowerCase() === 'enter' && this.currentGuess.length == 5){
           this.submitGuess()
         }
       }
