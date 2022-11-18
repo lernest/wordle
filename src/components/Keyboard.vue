@@ -27,15 +27,9 @@ data(){
 },
 props:{
     colorMap: Object,
-    key: Number
 },
 components:{
     KeyLetter
-},
-mounted(){
-    console.log("keyboard mounted")
-    console.log(this.colorMap)
-    console.log(this.colorMap['M'])
 },
 methods:{
     addLetter(letter){

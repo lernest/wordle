@@ -4,13 +4,14 @@
     <LetterRow v-if="guesses.length<6" :word="currentGuess"/>
     <LetterRow v-for="index in emptyRows" :key="index" word=""/>
   </div>
-  <Keyboard v-on:keyPressed="addLetter" :colorMap="colorMap" :key="componentKey"/>
+  <Keyboard v-on:keyPressed="addLetter" :colorMap="colorMap"/>
 </template>
 
 <script>
 import Keyboard from "./components/Keyboard.vue"
 import LetterRow from "./components/LetterRow.vue"
 import targets from "@/targets.js"
+import axios from "axios"
 
 export default {
   name: "App",
@@ -20,12 +21,11 @@ export default {
   },
   created() {
     window.addEventListener('keydown', (e) => {
-      //console.log(e.key)
       this.addLetter(e.key)
     });
   },
   mounted(){
-    this.target = targets[Math.floor(Math.random() * (targets.length - 1))]
+    this.target = targets[Math.floor(Math.random() * (targets.length))]
     console.log("Target: "+this.target)
     console.log(targets)
   },
@@ -43,14 +43,10 @@ export default {
       colorMap: {},
       guesses: [],
       evaluatedGuesses:[],
-      currentGuess:'',
-      componentKey: 0
+      currentGuess:''
     }
   },
   methods:{
-    forceRerender(){
-      this.componentKey += 1;
-    },
     printBoard(arr){
       let str = ''
       arr.forEach(x => {
@@ -86,10 +82,18 @@ export default {
     },
     submitGuess(){
       console.log('submitting guess: '+this.currentGuess)
-      this.evaluateGuess(this.currentGuess)
-      this.guesses.push(this.currentGuess)
-      this.currentGuess = ''
-      this.forceRerender()
+      axios
+      .get('https://api.dictionaryapi.dev/api/v2/entries/en/'+this.currentGuess)
+      .then(response => {
+        console.log(response)
+        this.evaluateGuess(this.currentGuess)
+        this.guesses.push(this.currentGuess)
+        this.currentGuess = ''
+        })
+      .catch(e => {
+          console.log(e)
+          console.log(`${this.currentGuess} is not a real word`)
+      })
     },
     evaluateGuess(guess){
       /* 
@@ -108,19 +112,16 @@ export default {
               if(targetArr.includes(guessArr[i][0])){
                   guessArr[i][1] = 1
               }
-      
           // if the letter matches the same index -> flip to green (2)
               if(guessArr[i][0] == targetArr[i]){
                   guessArr[i][1] = 2
               }
-      
           // otherwise keep it gray
       }
 
-      /*
-        update keyboard colors
-        if the letter isn't already green, set it to whichever color the evaluated guess indicates
-      */
+      
+      // update keyboard colors
+      // if the letter isn't already green, set it to whichever color the evaluated guess indicates
       guessArr.forEach(letter => {
         if(this.colorMap[letter[0]] != 2){
           this.colorMap[letter[0]] = letter[1]

@@ -13,9 +13,6 @@ props:{
     letter: String,
     color: Number
 },
-mounted(){
-    console.log(`mounted key letter: ${this.letter}  color: ${this.color}`)
-},
 computed:{
     colorClass(){
             if(this.color == 0){
