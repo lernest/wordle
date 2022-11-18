@@ -2,7 +2,7 @@
 <div>
   <LetterRow v-for="guess in guesses" :word="guess"/>
   <LetterRow v-if="guesses.length<6" :word="currentGuess"/>
-  <LetterRow v-for="index in emptyRows" :key="index" word="empty"/>
+  <LetterRow v-for="index in emptyRows" :key="index" word=""/>
 </div>
 <Keyboard v-on:keyPressed="addLetter"/>
 </template>
@@ -10,6 +10,8 @@
 <script>
 import Keyboard from "./components/Keyboard.vue";
 import LetterRow from "./components/LetterRow.vue";
+import targets from "@/targets.js"
+
 export default {
   name: "App",
   components: {
@@ -18,26 +20,26 @@ export default {
   },
   created() {
     window.addEventListener('keydown', (e) => {
-      console.log(e.key)
+      //console.log(e.key)
       this.addLetter(e.key)
     });
+  },
+  mounted(){
+    this.target = targets[Math.floor(Math.random() * (targets.length - 1))]
+    console.log("Target: "+this.target)
+    console.log(targets)
   },
   computed:{
     emptyRows(){
       return 5-this.guesses.length >= 0 ? 5-this.guesses.length : 0
     },
     isGameOver(){
-      return this.guesses.length === 6 || this.guessedLetters.green.size === 5
+      return this.guesses.length === 6 || Object.entries(this.colorMap).filter(x => x[1] == 2).length == 5
     }
   },
   data(){
     return{
       target: 'maple',
-      guessedLetters: {
-        gray: new Set(),
-        yellow: new Set(),
-        green: new Set()
-      },
       colorMap: {},
       guesses: [],//['raise','earth','maple'],
       evaluatedGuesses:[],
@@ -126,6 +128,9 @@ export default {
       // save the evaluated guess
       this.evaluatedGuesses.push(guessArr)
 
+    if(this.isGameOver){
+      console.log("You win!")
+    }
     }
   }
 };
