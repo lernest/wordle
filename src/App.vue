@@ -1,15 +1,15 @@
 <template>
-<div>
-  <LetterRow v-for="guess in guesses" :word="guess"/>
-  <LetterRow v-if="guesses.length<6" :word="currentGuess"/>
-  <LetterRow v-for="index in emptyRows" :key="index" word=""/>
-</div>
-<Keyboard v-on:keyPressed="addLetter"/>
+  <div>
+    <LetterRow v-for="guess in evaluatedGuesses" :evaluatedWord="guess" />
+    <LetterRow v-if="guesses.length<6" :word="currentGuess"/>
+    <LetterRow v-for="index in emptyRows" :key="index" word=""/>
+  </div>
+  <Keyboard v-on:keyPressed="addLetter"/>
 </template>
 
 <script>
-import Keyboard from "./components/Keyboard.vue";
-import LetterRow from "./components/LetterRow.vue";
+import Keyboard from "./components/Keyboard.vue"
+import LetterRow from "./components/LetterRow.vue"
 import targets from "@/targets.js"
 
 export default {
@@ -39,9 +39,9 @@ export default {
   },
   data(){
     return{
-      target: 'maple',
+      target: '', // set to random word from targets.js
       colorMap: {},
-      guesses: [],//['raise','earth','maple'],
+      guesses: [],
       evaluatedGuesses:[],
       currentGuess:'',
     }

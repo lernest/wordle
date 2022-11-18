@@ -1,11 +1,31 @@
 <template>
-  <div class="letter">{{letter.toUpperCase()}}</div>
+  <div class="letter" :class="colorClass">{{letter.toUpperCase()}}</div>
 </template>
 
 <script>
 export default {
     props:{
-        letter: String
+        letter: String,
+        color: Number
+    },
+    mounted(){
+        console.log(`letter: ${this.letter} color: ${this.color} class: ${this.colorClass}`)
+    },
+    computed:{
+        colorClass(){
+            if(this.color == 0){
+                return 'gray'
+            }
+            if(this.color == 1){
+                return 'yellow'
+            }
+            if(this.color == 2){
+                return 'green'
+            }
+            else{
+                return 'black'
+            }
+        }
     }
 }
 </script>
@@ -19,5 +39,18 @@ export default {
     width: 70px;
     height: 70px;
     color: white;
+}
+.black{
+    background-color:black
+}
+.gray{
+    background-color: gray;
+    color: red
+}
+.yellow{
+    background-color: yellow
+}
+.green{
+    background-color: green
 }
 </style>
