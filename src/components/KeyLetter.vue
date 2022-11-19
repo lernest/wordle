@@ -15,6 +15,12 @@ props:{
 },
 computed:{
     colorClass(){
+            if(this.letter === 'backspace'){
+                return 'backspace'
+            }
+            if(this.letter === 'enter'){
+                return 'enter'
+            }
             if(this.color == 0){
                 return 'gray'
             }
@@ -42,6 +48,14 @@ computed:{
     padding: 10px;
     min-width: 17px;
     cursor: pointer;
+}
+.backspace{
+    background-color:black;
+    min-width:68px
+}
+.enter{
+    background-color:black;
+    min-width:40px
 }
 .black{
     background-color:black;

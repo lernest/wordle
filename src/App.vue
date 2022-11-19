@@ -1,10 +1,14 @@
 <template>
-  <div>
+<div class="game">
+  <div class="rows">
     <LetterRow v-for="guess in evaluatedGuesses" :evaluatedWord="guess" />
     <LetterRow v-if="guesses.length<6" :word="currentGuess"/>
     <LetterRow v-for="index in emptyRows" :key="index" word=""/>
   </div>
-  <Keyboard v-on:keyPressed="addLetter" :colorMap="colorMap"/>
+  <div class="keyboard">
+    <Keyboard v-on:keyPressed="addLetter" :colorMap="colorMap"/>
+  </div>
+  </div>
 </template>
 
 <script>
@@ -121,7 +125,6 @@ export default {
           // otherwise keep it gray
       }
 
-      
       // update keyboard colors
       // if the letter isn't already green, set it to whichever color the evaluated guess indicates
       guessArr.forEach(letter => {
@@ -155,5 +158,8 @@ export default {
 }
 *{
   background-color: #2c3e50;
+}
+.game{
+  width: 100%
 }
 </style>
