@@ -34,12 +34,12 @@ export default {
 </script>
 
 <style>
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .row{
     max-width: 90%;
     margin: auto;
   }
-}
+} */
 
 .row{
     display: flex;
