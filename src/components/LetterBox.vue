@@ -31,9 +31,9 @@ export default {
 .letter{
     margin: auto;
     padding: 10px;
-    font-size: 50px;
-    width: 70px;
-    height: 70px;
+    font-size: 45px;
+    width: 60px;
+    height: 60px;
     color: white;
 }
 .black{

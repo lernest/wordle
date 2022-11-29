@@ -37,7 +37,7 @@ export default {
 .row{
     display: flex;
     justify-content: space-between;
-    width: 500px;
+    width: 450px;
     margin: 5px auto;
 }
 </style>

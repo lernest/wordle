@@ -42,7 +42,7 @@ methods:{
 
 <style>
 .keyboard{
-    width: 490px;
+    width: 450px;
     margin: auto;
 }
 .keyboard-row{
