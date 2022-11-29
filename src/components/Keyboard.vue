@@ -41,8 +41,15 @@ methods:{
 </script>
 
 <style>
+
+/* @media (max-width: 600px) {
+  .keyboard{
+    max-width: 50%;
+    margin: auto;
+  }
+} */
 .keyboard{
-    width: 450px;
+    width: 400px;
     margin: auto;
 }
 .keyboard-row{

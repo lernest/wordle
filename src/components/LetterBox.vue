@@ -28,6 +28,14 @@ export default {
 </script>
 
 <style>
+@media (max-width: 600px) {
+  .letter{
+    margin: 10px;
+    flex-basis: 12%;
+    height: 50px;
+  }
+}
+
 .letter{
     margin: auto;
     padding: 10px;

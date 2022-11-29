@@ -37,25 +37,25 @@ computed:{
 }
 }
 </script>
-
 <style>
+
 .letterkey{
     border: 1px solid rgb(18, 18, 18);
     background-color: rgb(82, 82, 82);
     border-radius: 10px;
     color: white;
-    font-size: 15px;
+    font-size: .7em;
     padding: 10px;
-    min-width: 17px;
+    min-width: 1em;
     cursor: pointer;
 }
 .backspace{
     background-color:black;
-    min-width:68px
+    min-width:4.5em;
 }
 .enter{
     background-color:black;
-    min-width:40px
+    min-width: 2.5em;
 }
 .black{
     background-color:black;
