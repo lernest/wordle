@@ -161,5 +161,7 @@ export default {
   background-color: #2c3e50;
 }
 
-
+.rows{
+  margin: auto;
+}
 </style>
