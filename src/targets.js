@@ -11,7 +11,15 @@ const targets = [
     'baked',
     'thyme',
     'basil',
-    'pizza'
+    'pizza',
+    'arise',
+    'boobs',
+    'dream',
+    'house',
+    'cream',
+    'light',
+    'flake',
+    'smile'
 ]
 
 module.exports = targets
