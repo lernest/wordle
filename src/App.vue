@@ -156,10 +156,21 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+/* @media (max-width: 600px) {
+  .game{
+    max-width: 80%;
+  }
+} */
+
 *{
   background-color: #2c3e50;
 }
 .game{
   width: 100%
 }
+/* 
+.keyboard{
+  display: flex;
+} */
 </style>

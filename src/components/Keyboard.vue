@@ -42,14 +42,13 @@ methods:{
 
 <style>
 .keyboard{
-    width: 470px;
+    width: 490px;
     margin: auto;
 }
 .keyboard-row{
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin: 4px auto;
+    justify-content: space-evenly;
+    margin: 4px;
 }
 </style>
