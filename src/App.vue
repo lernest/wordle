@@ -155,6 +155,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  width: 100%;
 }
 
 *{
@@ -163,5 +164,7 @@ export default {
 
 .rows{
   margin: auto;
+  width: 100%;
 }
+
 </style>

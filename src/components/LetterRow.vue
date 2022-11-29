@@ -36,14 +36,14 @@ export default {
 <style>
 @media (max-width: 600px) {
   .row{
-    max-width: 90%;
+    max-width: 95%;
     margin: auto;
   }
 }
 
 .row{
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     width: 450px;
     margin: 5px auto;
 }

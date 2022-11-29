@@ -49,7 +49,7 @@ methods:{
   }
 } */
 .keyboard{
-    width: 400px;
+    max-width: 450px;
     margin: auto;
 }
 .keyboard-row{
