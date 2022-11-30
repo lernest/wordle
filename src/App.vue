@@ -1,4 +1,5 @@
 <template>
+<Modal v-if="showModal" :target="target" :guesses="evaluatedGuesses" @closeModal="closeModal"/>
 <div class="game">
   <div class="rows">
     <LetterRow v-for="guess in evaluatedGuesses" :evaluatedWord="guess" />
@@ -12,6 +13,7 @@
 </template>
 
 <script>
+import Modal from "./components/Modal.vue"
 import Keyboard from "./components/Keyboard.vue"
 import LetterRow from "./components/LetterRow.vue"
 import targets from "@/targets.js"
@@ -21,7 +23,8 @@ export default {
   name: "App",
   components: {
     LetterRow,
-    Keyboard
+    Keyboard,
+    Modal
   },
   created() {
     window.addEventListener('keydown', (e) => {
@@ -38,7 +41,21 @@ export default {
       return 5-this.guesses.length >= 0 ? 5-this.guesses.length : 0
     },
     isGameOver(){
-      return this.guesses.length === 6 || Object.entries(this.colorMap).filter(x => x[1] == 2).length == 5
+      // get the last evaluated guess
+      if(this.evaluatedGuesses.length>0){
+        let lastGuess = this.evaluatedGuesses[this.evaluatedGuesses.length-1]
+        console.log("filtered guess: ")
+        console.log(lastGuess.filter(x=>x[1]==2))
+        console.log(`isGameOver:  ${this.guesses.length === 6 || lastGuess.filter(x=>x[1]==2).length == 5}`)
+
+        return this.guesses.length === 6 || lastGuess.filter(x=>x[1]==2).length == 5
+      }
+      else{
+        return false
+      }
+    },
+    showModal(){
+      return this.isGameOver && this.showModalToggle
     }
   },
   data(){
@@ -47,10 +64,17 @@ export default {
       colorMap: {},
       guesses: [],
       evaluatedGuesses:[],
-      currentGuess:''
+      currentGuess:'',
+      showModalToggle: true
     }
   },
   methods:{
+    closeModal(){
+      this.showModalToggle = false
+    },
+    openModal(){
+      this.showModalToggle = true
+    },
     printBoard(arr){
       let str = ''
       arr.forEach(x => {
