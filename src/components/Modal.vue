@@ -23,6 +23,10 @@ export default {
         guesses: Array
     },
     methods:{
+        copy() {
+            this.$refs.myinput.focus();
+            document.execCommand('copy');
+        },
         handleClick(){
             console.log("clicked")
             this.$emit('closeModal')
@@ -117,7 +121,7 @@ export default {
 
 /* Modal Content/Box */
 .modal-content {
-  background-color:  rgba(0,0,0,0.4);
+  background-color:  rgba(0,0,0,0.7);
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
@@ -147,7 +151,13 @@ export default {
     background-color: rgba(0,0,0,0);
 }
 .scoreboard p{
-    margin: 0px;
+    margin: 1px;
+}
+.scoreboard{
+    background-color: rgba(44, 62, 80,0.7);
+    padding: 5px;
+    width: 7em;
+    margin: auto;
 }
 .score{
     font-size:1.4em;
