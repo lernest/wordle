@@ -43,9 +43,10 @@ export default {
     width: 60px;
     height: 60px;
     color: white;
+    border: 2px solid black;
 }
 .black{
-    background-color:black;
+    background-color:rgba(0, 0, 0, 0.504);
 }
 .gray{
     background-color: rgb(52, 52, 52);

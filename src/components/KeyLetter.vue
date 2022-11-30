@@ -31,7 +31,7 @@ computed:{
                 return 'green'
             }
             else{
-                return 'black'
+                return 'blackkey'
             }
         }
 }
@@ -57,7 +57,7 @@ computed:{
     background-color:black;
     min-width: 2.5em;
 }
-.black{
+.blackkey{
     background-color:black;
 }
 .gray{
