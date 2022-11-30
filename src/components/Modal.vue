@@ -10,6 +10,7 @@
     <div class="scoreboard">
         <p v-for="row in scoreboard" v-html="row"></p>
     </div>
+    <!-- <button @click="copy">click</button> -->
     </div>
 
 </div>
@@ -23,10 +24,16 @@ export default {
         guesses: Array
     },
     methods:{
-        copy() {
-            this.$refs.myinput.focus();
-            document.execCommand('copy');
-        },
+    //     copy() {
+    //         navigator.clipboard.writeText()
+    //     },
+    //     copyURL() {
+    //   var Url = this.$refs.mylink;
+    //   Url.innerHTML = window.location.href;
+    //   console.log(Url.innerHTML)
+    //   Url.select();
+    //   document.execCommand("copy");
+    // },
         handleClick(){
             console.log("clicked")
             this.$emit('closeModal')
@@ -137,7 +144,7 @@ export default {
 
 .close:hover,
 .close:focus {
-  color: black;
+    color: rgb(128, 128, 128);
   text-decoration: none;
   cursor: pointer;
 }
