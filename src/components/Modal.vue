@@ -8,9 +8,12 @@
     <h2>Score</h2>
     <p>The word was: <span class="target">{{target.toUpperCase()}}</span></p>
     <p>&#128159</p>
+    <p>&#x231A</p>
     <p>{{guesses}}</p>
     <p>{{guesses[guesses.length-1].map(x=>x[0]).join('')==target.toUpperCase()}}</p>
-        <p>{{scoreboard}}</p>
+    <div class="scoreboard">
+        <p v-for="row in scoreboard" v-text="row"></p>
+    </div>
     </div>
 
 </div>
@@ -34,15 +37,15 @@ export default {
             switch(pair[1]){
                 case 0:
                     // console.log(0)
-                    symbol= "_"
+                    symbol= this.theme[this.currentTheme][0]
                     break;                
                 case 1:
                     // console.log(1)
-                    symbol= ".."
+                    symbol= this.theme[this.currentTheme][1]
                     break;
                 case 2:
                     // console.log(2)
-                    symbol= "X"
+                    symbol= this.theme[this.currentTheme][2]
                     break;            
                 }
                 console.log("symbol: "+symbol)
@@ -53,8 +56,9 @@ export default {
             console.log("   guessArray:  "+guessArray)
             let result =  guessArray.map(x=>this.getSymbol(x))
             console.log("   result: "+result)
+            console.log("   string result: "+result)
            
-            return guessArray.join("")
+            return result.join(" ")
         }
     },
     computed:{
@@ -84,7 +88,9 @@ export default {
                 // faces:{
 
                 // }
-            }
+            },
+            theme:[[`&#128159`,'&#128155','&#x231A'],['_','..','$'],[' ',' ',' ']],
+            currentTheme: 0
         }
     }
 }
@@ -133,5 +139,8 @@ export default {
 .target{
     font-weight: bold;
     font-size: 1.2em
+}
+.scoreboard p{
+    margin: 0px;
 }
 </style>
