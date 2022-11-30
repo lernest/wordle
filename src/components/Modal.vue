@@ -115,9 +115,6 @@ export default {
     text-align: center;
 }
 
-.scoreboard{
-    background-color: rgba(0,0,0,0);
-}
 
 /* Modal Content/Box */
 .modal-content {
@@ -156,7 +153,7 @@ export default {
 .scoreboard{
     background-color: rgba(44, 62, 80,0.7);
     padding: 5px;
-    width: 7em;
+    width: 9em;
     margin: auto;
 }
 .score{
