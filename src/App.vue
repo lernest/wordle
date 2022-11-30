@@ -95,7 +95,7 @@ export default {
     },
     addLetter(letter){
       let validKeys = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','backspace','enter']
-      if(this.isGameOver && letter ==="enter"){
+      if(this.isGameOver){
         this.openModal()
       }
 
