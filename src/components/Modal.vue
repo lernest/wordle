@@ -5,14 +5,10 @@
     <!-- Modal content -->
     <div class="modal-content">
     <span class="close" @click="handleClick">&times;</span>
-    <h2>Score</h2>
     <p>The word was: <span class="target">{{target.toUpperCase()}}</span></p>
-    <p>&#128159</p>
-    <p>&#x231A</p>
-    <p>{{guesses}}</p>
-    <p>{{guesses[guesses.length-1].map(x=>x[0]).join('')==target.toUpperCase()}}</p>
+    <div class="score">{{isWinner ? guesses.length : 'X'}}/6</div>
     <div class="scoreboard">
-        <p v-for="row in scoreboard" v-text="row"></p>
+        <p v-for="row in scoreboard" v-html="row"></p>
     </div>
     </div>
 
@@ -33,19 +29,20 @@ export default {
         },
         getSymbol(pair){
             console.log("       getting symbol for pair: "+pair)
+            console.log(this.currentTheme)
             let symbol
             switch(pair[1]){
                 case 0:
                     // console.log(0)
-                    symbol= this.theme[this.currentTheme][0]
+                    symbol= this.themes[this.currentTheme][0]
                     break;                
                 case 1:
                     // console.log(1)
-                    symbol= this.theme[this.currentTheme][1]
+                    symbol= this.themes[this.currentTheme][1]
                     break;
                 case 2:
                     // console.log(2)
-                    symbol= this.theme[this.currentTheme][2]
+                    symbol= this.themes[this.currentTheme][2]
                     break;            
                 }
                 console.log("symbol: "+symbol)
@@ -54,7 +51,7 @@ export default {
         getScoreboardRow(guessArray){
             console.log("getting scoreboard row")
             console.log("   guessArray:  "+guessArray)
-            let result =  guessArray.map(x=>this.getSymbol(x))
+            let result =  guessArray.map(x=>`<span> ${this.getSymbol(x)} </span>`)
             console.log("   result: "+result)
             console.log("   string result: "+result)
            
@@ -62,8 +59,11 @@ export default {
         }
     },
     computed:{
+        markup(){
+            return "<span> &#x231A </span>"
+        },
         isWinner(){
-            return guesses[guesses.length-1].map(x=>x[0]).join('')==target.toUpperCase()
+            return this.guesses[this.guesses.length-1].map(x=>x[0]).join('')==this.target.toUpperCase()
         },
 
         scoreboard(){
@@ -75,21 +75,15 @@ export default {
     },
     data(){
         return{
-            themes:{
-                hearts:{
-                    0: "_",
-                    1: " ",
-                    2: "*"
-                }
-                // },
-                // blocks:{
-
-                // },
-                // faces:{
-
-                // }
-            },
-            theme:[[`&#128159`,'&#128155','&#x231A'],['_','..','$'],[' ',' ',' ']],
+            inputText:"&#128159",
+            // themes:{
+            //     hearts:[`&#128420`,'&#128155','&#128154'],
+            //     blocks:['&#','&#','&#'],
+            //     faces:['&#128542','&#128559','&#128526'],
+            //     books:['&#128211','&#128210','&#128215'],
+            //     stars:[]
+            // },
+            themes:[['&#128542','&#128559','&#128526','faces'],[`&#128420`,'&#128155','&#128154'],['_','..','$'],[' ',' ',' ']],
             currentTheme: 0
         }
     }
@@ -107,13 +101,23 @@ export default {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgb(0,0,0);  /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  /* text-align: center; */
+}
+
+.modal h2,h3,p{
+    background-color: rgba(0,0,0,0);
+    text-align: center;
+}
+
+.scoreboard{
+    background-color: rgba(0,0,0,0);
 }
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
+  background-color:  rgba(0,0,0,0.4);
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
@@ -127,6 +131,7 @@ export default {
   float: right;
   font-size: 28px;
   font-weight: bold;
+  background-color: rgba(0,0,0,0);
 }
 
 .close:hover,
@@ -138,9 +143,16 @@ export default {
 
 .target{
     font-weight: bold;
-    font-size: 1.2em
+    font-size: 1.2em;
+    background-color: rgba(0,0,0,0);
 }
 .scoreboard p{
     margin: 0px;
+}
+.score{
+    font-size:1.4em;
+    text-align: center;
+    background-color: rgba(0,0,0,0);
+    margin-bottom: 20px
 }
 </style>
