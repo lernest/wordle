@@ -203,6 +203,40 @@ export default {
 </script>
 
 <style>
+:root {
+  --yellow: rgb(206, 169, 6);
+  --green: rgb(0, 78, 0);
+  --gray: rgb(52, 52, 52);
+  --empty-color: rgba(0, 0, 0, 0.504);
+  --background: rgb(44, 62, 80);
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  /* color: #2c3e50; */
+  margin-top: 60px;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  #app{
+    margin-top: 10px;
+  }
+}
+
+*{
+  background-color: var(--background)
+}
+
+.rows{
+  margin: auto;
+  width: 100%;
+}
+
+/* shake row when an invalid word is submitted */
 .shake {
   animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
   transform: translate3d(0, 0, 0);
@@ -220,36 +254,6 @@ export default {
   40%, 60% {
     transform: translate3d(4px, 0, 0);
   }
-}
-:root {
-  --yellow: rgb(206, 169, 6);
-  --green: rgb(0, 78, 0);
-  --gray: rgb(52, 52, 52);
-}
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-  width: 100%;
-}
-
-@media (max-width: 600px) {
-  #app{
-    margin-top: 10px;
-  }
-}
-
-*{
-  background-color: #2c3e50;
-}
-
-.rows{
-  margin: auto;
-  width: 100%;
 }
 
 </style>

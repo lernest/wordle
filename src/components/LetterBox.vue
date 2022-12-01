@@ -15,7 +15,7 @@ export default {
         },
         style() {
             if(this.color == -1){
-                return `background-color:rgba(0, 0, 0, 0.504);`
+                return `background-color:var(--empty-color);`
             }
             return `animation: flip-${this.colorClass} 1s ${this.index*0.12}s forwards`
         },
@@ -42,6 +42,7 @@ export default {
     0% {
     transform: perspective(120px) rotateX(0deg) rotateY(0deg);
     -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    background-color:var(--empty-color)
     }
     
     100% {
@@ -54,7 +55,7 @@ export default {
     0% {
     transform: perspective(120px) rotateX(0deg) rotateY(0deg);
     -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-
+    background-color:var(--empty-color)
     }
     
     100% {
@@ -67,6 +68,7 @@ export default {
     0% {
     transform: perspective(120px) rotateX(0deg) rotateY(0deg);
     -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    background-color:var(--empty-color)
     }
     
     100% {
@@ -80,7 +82,7 @@ export default {
   .letter{
     margin: 10px;
     flex-basis: 12%;
-    height: 50px;
+    height: 40px;
   }
 }
 
