@@ -193,7 +193,7 @@ export default {
       // save the evaluated guess
       this.evaluatedGuesses.push(guessArr)
 
-    if(this.isGameOver){
+    if(this.isGameOver || this.evaluatedGuesses.length == 6){
       setTimeout(this.openModal,1300)
       console.log("You win!")
     }
