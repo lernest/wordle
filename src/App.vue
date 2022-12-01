@@ -3,7 +3,7 @@
 <div class="game">
   <div class="rows">
     <LetterRow v-for="guess in evaluatedGuesses" :evaluatedWord="guess" />
-    <span class="currentGuess"><LetterRow v-if="guesses.length<6" :word="currentGuess"/></span>
+    <div :class="{'shake' : animated}"><LetterRow v-if="guesses.length<6" :word="currentGuess"/></div>
     <LetterRow v-for="index in emptyRows" :key="index" word=""/>
   </div>
   <div class="keyboard">
@@ -65,10 +65,18 @@ export default {
       guesses: [],
       evaluatedGuesses:[],
       currentGuess:'',
-      showModalToggle: false
+      showModalToggle: false,
+      animated: false
     }
   },
   methods:{
+    shakeHandler() {
+      const self = this
+      self.animated = true
+      setTimeout(() => {
+        self.animated = false
+      }, 1000)
+    },
     closeModal(){
       this.showModalToggle = false
     },
@@ -126,6 +134,7 @@ export default {
       .catch(e => {
           console.log(e)
           console.log(`${this.currentGuess} is not a real word`)
+          this.shakeHandler()
       })
     },
     evaluateGuess(guess){
@@ -176,6 +185,24 @@ export default {
 </script>
 
 <style>
+.shake {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+}
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
 :root {
   --yellow: rgb(206, 169, 6);
   --green: rgb(0, 78, 0);
