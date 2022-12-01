@@ -3,7 +3,7 @@
 <div class="game">
   <div class="rows">
     <LetterRow v-for="guess in evaluatedGuesses" :evaluatedWord="guess" />
-    <LetterRow v-if="guesses.length<6" :word="currentGuess"/>
+    <span class="currentGuess"><LetterRow v-if="guesses.length<6" :word="currentGuess"/></span>
     <LetterRow v-for="index in emptyRows" :key="index" word=""/>
   </div>
   <div class="keyboard">
@@ -65,7 +65,7 @@ export default {
       guesses: [],
       evaluatedGuesses:[],
       currentGuess:'',
-      showModalToggle: true
+      showModalToggle: false
     }
   },
   methods:{
@@ -167,6 +167,7 @@ export default {
       this.evaluatedGuesses.push(guessArr)
 
     if(this.isGameOver){
+      setTimeout(this.openModal,1300)
       console.log("You win!")
     }
     }
@@ -175,6 +176,12 @@ export default {
 </script>
 
 <style>
+:root {
+  --yellow: rgb(206, 169, 6);
+  --green: rgb(0, 78, 0);
+  --gray: rgb(52, 52, 52);
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

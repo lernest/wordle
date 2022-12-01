@@ -1,14 +1,24 @@
 <template>
-  <div class="letter" :class="colorClass">{{letter.toUpperCase()}}</div>
+  <div class="letter" :style="style">{{letter.toUpperCase()}}</div>
 </template>
 
 <script>
 export default {
     props:{
         letter: String,
-        color: Number
+        color: Number,
+        index: Number
     },
     computed:{
+        indexInt(){
+            return parseInt(this.index)
+        },
+        style() {
+            if(this.color == -1){
+                return `background-color:rgba(0, 0, 0, 0.504);`
+            }
+            return `animation: flip-${this.colorClass} 1s ${this.index*0.12}s forwards`
+        },
         colorClass(){
             if(this.color == 0){
                 return 'gray'
@@ -28,6 +38,44 @@ export default {
 </script>
 
 <style>
+@keyframes flip-yellow{
+    0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    }
+    
+    100% {
+    transform: perspective(120px) rotateX(-360deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-360deg) rotateY(0deg);
+    background-color: var(--yellow);
+    } 
+}
+@keyframes flip-green{
+    0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+
+    }
+    
+    100% {
+    transform: perspective(120px) rotateX(-360deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-360deg) rotateY(0deg);
+    background-color: var(--green);
+    } 
+}
+@keyframes flip-gray{
+    0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    }
+    
+    100% {
+    transform: perspective(120px) rotateX(-360deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-360deg) rotateY(0deg);
+    background-color: var(--gray);
+    } 
+}
+
 @media (max-width: 600px) {
   .letter{
     margin: 10px;
@@ -44,17 +92,5 @@ export default {
     height: 60px;
     color: white;
     border: 2px solid black;
-}
-.black{
-    background-color:rgba(0, 0, 0, 0.504);
-}
-.gray{
-    background-color: rgb(52, 52, 52);
-}
-.yellow{
-    background-color: rgb(206, 169, 6);
-}
-.green{
-    background-color: rgb(0, 78, 0);
 }
 </style>
