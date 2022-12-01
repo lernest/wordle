@@ -124,7 +124,9 @@ export default {
       console.log(this.currentGuess)
     },
     submitGuess(){
+      // only one request at a time
       if(!this.isBlocked){
+        // first check the list of valid words that are known to not be in the dictionary API
         if(validWords.includes(this.currentGuess)){
           console.log("your guess is valid!!")
           this.evaluateGuess(this.currentGuess)
@@ -133,7 +135,7 @@ export default {
           this.isBlocked = false;
           return;
         }
-        this.isBlocked = true;
+        this.isBlocked = true;  // block requests until this one is completed
         console.log('submitting guess: '+this.currentGuess)
         axios
         .get('https://api.dictionaryapi.dev/api/v2/entries/en/'+this.currentGuess)
@@ -142,13 +144,13 @@ export default {
           this.evaluateGuess(this.currentGuess)
           this.guesses.push(this.currentGuess)
           this.currentGuess = ''
-          this.isBlocked = false;
+          this.isBlocked = false; // unblock requests
           })
         .catch(e => {
             console.log(e)
             console.log(`${this.currentGuess} is not a real word`)
             this.shakeHandler()
-            this.isBlocked = false;
+            this.isBlocked = false; // unblock requests
         })
       }
       else{
@@ -194,6 +196,7 @@ export default {
       this.evaluatedGuesses.push(guessArr)
 
     if(this.isGameOver || this.evaluatedGuesses.length == 6){
+      // wait a second before displaying the score modal
       setTimeout(this.openModal,1300)
       console.log("You win!")
     }
