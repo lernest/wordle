@@ -17,6 +17,7 @@ import Modal from "./components/Modal.vue"
 import Keyboard from "./components/Keyboard.vue"
 import LetterRow from "./components/LetterRow.vue"
 import targets from "@/targets.js"
+import validWords from "@/valid.js"
 import axios from "axios"
 
 export default {
@@ -25,6 +26,18 @@ export default {
     LetterRow,
     Keyboard,
     Modal
+  },
+  data(){
+    return{
+      target: '', // set to random word from targets.js
+      colorMap: {},
+      guesses: [],
+      evaluatedGuesses:[],
+      currentGuess:'',
+      showModalToggle: false,
+      animated: false,
+      isBlocked: false
+    }
   },
   created() {
     window.addEventListener('keydown', (e) => {
@@ -56,17 +69,6 @@ export default {
     },
     showModal(){
       return this.isGameOver && this.showModalToggle
-    }
-  },
-  data(){
-    return{
-      target: '', // set to random word from targets.js
-      colorMap: {},
-      guesses: [],
-      evaluatedGuesses:[],
-      currentGuess:'',
-      showModalToggle: false,
-      animated: false
     }
   },
   methods:{
@@ -122,20 +124,36 @@ export default {
       console.log(this.currentGuess)
     },
     submitGuess(){
-      console.log('submitting guess: '+this.currentGuess)
-      axios
-      .get('https://api.dictionaryapi.dev/api/v2/entries/en/'+this.currentGuess)
-      .then(response => {
-        console.log(response)
-        this.evaluateGuess(this.currentGuess)
-        this.guesses.push(this.currentGuess)
-        this.currentGuess = ''
+      if(!this.isBlocked){
+        if(validWords.includes(this.currentGuess)){
+          console.log("your guess is valid!!")
+          this.evaluateGuess(this.currentGuess)
+          this.guesses.push(this.currentGuess)
+          this.currentGuess = ''
+          this.isBlocked = false;
+          return;
+        }
+        this.isBlocked = true;
+        console.log('submitting guess: '+this.currentGuess)
+        axios
+        .get('https://api.dictionaryapi.dev/api/v2/entries/en/'+this.currentGuess)
+        .then(response => {
+          console.log(response)
+          this.evaluateGuess(this.currentGuess)
+          this.guesses.push(this.currentGuess)
+          this.currentGuess = ''
+          this.isBlocked = false;
+          })
+        .catch(e => {
+            console.log(e)
+            console.log(`${this.currentGuess} is not a real word`)
+            this.shakeHandler()
+            this.isBlocked = false;
         })
-      .catch(e => {
-          console.log(e)
-          console.log(`${this.currentGuess} is not a real word`)
-          this.shakeHandler()
-      })
+      }
+      else{
+        console.log("blocked while processing request")
+      }
     },
     evaluateGuess(guess){
       /* 
