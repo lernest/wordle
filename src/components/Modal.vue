@@ -10,7 +10,6 @@
     <div class="scoreboard">
         <p v-for="row in scoreboard" v-html="row"></p>
     </div>
-    <!-- <button @click="copy">click</button> -->
     </div>
 
 </div>
@@ -24,16 +23,6 @@ export default {
         guesses: Array
     },
     methods:{
-    //     copy() {
-    //         navigator.clipboard.writeText()
-    //     },
-    //     copyURL() {
-    //   var Url = this.$refs.mylink;
-    //   Url.innerHTML = window.location.href;
-    //   console.log(Url.innerHTML)
-    //   Url.select();
-    //   document.execCommand("copy");
-    // },
         handleClick(){
             console.log("clicked")
             this.$emit('closeModal')
@@ -44,15 +33,12 @@ export default {
             let symbol
             switch(pair[1]){
                 case 0:
-                    // console.log(0)
                     symbol= this.themes[this.currentTheme][0]
                     break;                
                 case 1:
-                    // console.log(1)
                     symbol= this.themes[this.currentTheme][1]
                     break;
                 case 2:
-                    // console.log(2)
                     symbol= this.themes[this.currentTheme][2]
                     break;            
                 }
@@ -94,8 +80,8 @@ export default {
             //     books:['&#128211','&#128210','&#128215'],
             //     stars:[]
             // },
-            themes:[['&#128546','&#128559','&#128526','faces'],[`&#128420`,'&#128155','&#128154','hearts'],['_','..','$'],[' ',' ',' ']],
-            currentTheme: 1
+            themes:[['&#128546','&#128559','&#128526','faces'],[`&#128420`,'&#128155','&#128154','hearts']],
+            currentTheme: 1 // index of current theme in themes array
         }
     }
 }
