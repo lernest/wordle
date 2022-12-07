@@ -73,6 +73,7 @@ export default {
   },
   methods:{
     shakeHandler() {
+      // call when an invalid word is submitted
       const self = this
       self.animated = true
       setTimeout(() => {
@@ -86,6 +87,7 @@ export default {
       this.showModalToggle = true
     },
     printBoard(arr){
+      // for debugging purposes
       let str = ''
       arr.forEach(x => {
           if(x[1] == 1){
@@ -104,6 +106,7 @@ export default {
       console.log(str)
     },
     addLetter(letter){
+      // add a letter to the current guess
       let validKeys = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','backspace','enter']
       if(this.isGameOver){
         this.openModal()
@@ -158,6 +161,7 @@ export default {
       }
     },
     evaluateGuess(guess){
+      // After a guess is submitted and validated in the dictionary, evaluate it against the target
       /* 
       'guessArr' is an array of tuples containing each character in the current guess and the evaluated color
             ex: [['a',2],['m',1],['l',2],['e',0]]
