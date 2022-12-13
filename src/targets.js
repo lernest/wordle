@@ -13,13 +13,15 @@ const targets = [
     'basil',
     'pizza',
     'arise',
-    'boobs',
     'dream',
     'house',
     'cream',
     'light',
     'flake',
-    'smile'
+    'smile',
+    'piece',
+    'treat',
+    'ruler'
 ]
 
 module.exports = targets
