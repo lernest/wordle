@@ -46,8 +46,8 @@ export default {
   },
   mounted(){
     this.target = targets[Math.floor(Math.random() * (targets.length))]
-    console.log("Target: "+this.target)
-    console.log(targets)
+    // console.log("Target: "+this.target)
+    // console.log(targets)
   },
   computed:{
     emptyRows(){
@@ -57,9 +57,9 @@ export default {
       // get the last evaluated guess
       if(this.evaluatedGuesses.length>0){
         let lastGuess = this.evaluatedGuesses[this.evaluatedGuesses.length-1]
-        console.log("filtered guess: ")
-        console.log(lastGuess.filter(x=>x[1]==2))
-        console.log(`isGameOver:  ${this.guesses.length === 6 || lastGuess.filter(x=>x[1]==2).length == 5}`)
+        // console.log("filtered guess: ")
+        // console.log(lastGuess.filter(x=>x[1]==2))
+        // console.log(`isGameOver:  ${this.guesses.length === 6 || lastGuess.filter(x=>x[1]==2).length == 5}`)
 
         return this.guesses.length === 6 || lastGuess.filter(x=>x[1]==2).length == 5
       }
@@ -103,7 +103,7 @@ export default {
           str += `|   ${x[0]}   |`
           }
       })
-      console.log(str)
+      // console.log(str)
     },
     addLetter(letter){
       // add a letter to the current guess
@@ -124,14 +124,14 @@ export default {
           this.submitGuess()
         }
       }
-      console.log(this.currentGuess)
+      // console.log(this.currentGuess)
     },
     submitGuess(){
       // only one request at a time
       if(!this.isBlocked){
         // first check the list of valid words that are known to not be in the dictionary API
         if(validWords.includes(this.currentGuess)){
-          console.log("your guess is valid!!")
+          // console.log("your guess is valid!!")
           this.evaluateGuess(this.currentGuess)
           this.guesses.push(this.currentGuess)
           this.currentGuess = ''
@@ -139,19 +139,19 @@ export default {
           return;
         }
         this.isBlocked = true;  // block requests until this one is completed
-        console.log('submitting guess: '+this.currentGuess)
+        // console.log('submitting guess: '+this.currentGuess)
         axios
         .get('https://api.dictionaryapi.dev/api/v2/entries/en/'+this.currentGuess)
         .then(response => {
-          console.log(response)
+          // console.log(response)
           this.evaluateGuess(this.currentGuess)
           this.guesses.push(this.currentGuess)
           this.currentGuess = ''
           this.isBlocked = false; // unblock requests
           })
         .catch(e => {
-            console.log(e)
-            console.log(`${this.currentGuess} is not a real word`)
+            // console.log(e)
+            // console.log(`${this.currentGuess} is not a real word`)
             this.shakeHandler()
             this.isBlocked = false; // unblock requests
         })
@@ -194,7 +194,7 @@ export default {
       })
 
       this.printBoard(guessArr)
-      console.log(this.colorMap)
+      // console.log(this.colorMap)
 
       // save the evaluated guess
       this.evaluatedGuesses.push(guessArr)
@@ -202,7 +202,7 @@ export default {
     if(this.isGameOver || this.evaluatedGuesses.length == 6){
       // wait a second before displaying the score modal
       setTimeout(this.openModal,1300)
-      console.log("You win!")
+      // console.log("You win!")
     }
     }
   }
